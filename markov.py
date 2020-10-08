@@ -13,7 +13,8 @@ def open_and_read_file(filenames):
         body = body + text_file.read()
         text_file.close()
 
-    return body
+    return body 
+    # test comment 
 
 
 def make_chains(text_string):
