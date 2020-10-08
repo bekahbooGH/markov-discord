@@ -10,13 +10,13 @@ import discord
 def open_and_read_file(filenames):
     """Take list of files. Open them, read them, and return one long string."""
 
-    body = ''
+    text_string = ''
     for filename in filenames:
         text_file = open(filename)
-        body = body + text_file.read()
+        text_string = text_string + text_file.read()
         text_file.close()
 
-    return body 
+    return text_string
     # test comment 
 
 
@@ -64,10 +64,10 @@ def make_text(chains):
 filenames = sys.argv[1:]
 
 # Open the files and turn them into one long string
-text = open_and_read_file(filenames)
+text_string = open_and_read_file(filenames)
 
 # Get a Markov chain
-chains = make_chains(text)
+chains = make_chains(text_string)
 
 
 client = discord.Client()
@@ -81,6 +81,6 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content.startswith('$bek_bot_markov'):
-        await message.channel.send("Grrrrrr")
+        await message.channel.send(make_text(chains))
 
 client.run(os.environ['DISCORD_TOKEN'])
